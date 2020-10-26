@@ -1,6 +1,7 @@
-﻿Primary Resource/Reference
+Primary Resource/Reference
 https://www.geeksforgeeks.org/socket-programming-in-c-sharp/
 https://docs.microsoft.com/en-us/dotnet/api/system.net.sockets.socket?view=netcore-3.1
+https://www.developerfusion.com/article/3918/socket-programming-in-c-part-1/
 
 TCP/IP Model
 https://www.geeksforgeeks.org/tcp-ip-model/
@@ -8,6 +9,14 @@ https://www.geeksforgeeks.org/tcp-ip-model/
 Basic string message
 https://stackoverflow.com/questions/8773721/how-to-send-a-string-over-a-socket-in-c-sharp
 
-Asynchronous Sockets
-https://www.youtube.com/watch?v=Bq1JhTHlxek
-https://www.youtube.com/watch?v=cG5q4XdYIUI
+General Approach
+
+Step 1) Create an object of the Socket class.
+m_socListener = new Socket(AddressFamily.InterNetwork,SocketType.Stream,ProtocolType.Tcp);
+
+Notes:
+AddressFamily.InterNetwork = Address for IP version 4.
+SocketType.Stream = Specify socket type. Stream = Two way connection-based. Datagrams = UDP (Connectionless sockets).
+ProtocolType.Tcp = Specify protocol type.
+
+Step 2) 
