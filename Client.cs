@@ -1,4 +1,4 @@
-﻿// A C# program for Client 
+// A C# program for Client 
 using System;
 using System.Net;
 using System.Net.Sockets;
@@ -46,10 +46,13 @@ namespace Client
 
                     // We receive the message using the method Receive(). This method returns number of bytes received, that we'll use to convert them to string 
                     // Note to self: Mutiple receive methods must be placed here to recieve further messages from the server.
-                    int byteRecv = sender.Receive(messageReceived);
-                    Console.WriteLine("Message from Server -> {0}",
-                          Encoding.ASCII.GetString(messageReceived,
-                                                     0, byteRecv));
+                    for (int i = 0; i <= 10; i++)
+                    {
+                        int byteRecv = sender.Receive(messageReceived);
+                        Console.WriteLine("Message from Server -> {0}",
+                              Encoding.ASCII.GetString(messageReceived,
+                                                         0, byteRecv));
+                    }
 
                     // Close Socket using  
                     // the method Close() 
