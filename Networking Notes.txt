@@ -12,11 +12,14 @@ https://stackoverflow.com/questions/8773721/how-to-send-a-string-over-a-socket-i
 General Approach
 
 Step 1) Create an object of the Socket class.
-m_socListener = new Socket(AddressFamily.InterNetwork,SocketType.Stream,ProtocolType.Tcp);
+Socket m_socListener = new Socket(AddressFamily.InterNetwork,SocketType.Stream,ProtocolType.Tcp);
 
 Notes:
 AddressFamily.InterNetwork = Address for IP version 4.
 SocketType.Stream = Specify socket type. Stream = Two way connection-based. Datagrams = UDP (Connectionless sockets).
 ProtocolType.Tcp = Specify protocol type.
 
-Step 2) 
+Step 2) Get IP Address and port to create a remote connection to, then connect.
+IPAddress ipAddr = System.Net.IPAddress.Parse("10.10.101.200");
+IPEndPoint localEndPoint = new IPEndPoint(ipAddr, 8221);
+sender.Connect(localEndPoint);
