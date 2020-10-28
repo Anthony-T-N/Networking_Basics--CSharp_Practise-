@@ -1,4 +1,4 @@
-﻿// A C# Program for Server 
+// A C# Program for Server 
 using System;
 using System.Net;
 using System.Net.Sockets;
@@ -56,27 +56,33 @@ namespace Server
                     {
                         int numByte = clientSocket.Receive(bytes);
 
-                        data += Encoding.ASCII.GetString(bytes,
-                                                   0, numByte);
+                        data += Encoding.ASCII.GetString(bytes, 0, numByte);
+
+                        Console.WriteLine("Me: " + data);
 
                         if (data.IndexOf("<EOF>") > -1)
                             break;
                     }
 
                     Console.WriteLine("Text received -> {0} ", data);
-                    byte[] message = Encoding.ASCII.GetBytes("Test Server");
-                    byte[] message1 = Encoding.ASCII.GetBytes("Test");
-                    byte[] message2 = Encoding.ASCII.GetBytes("Helloooooooooooooooo");
-                    // Send a message to Client  
-                    // using Send() method 
-                    clientSocket.Send(message);
-                    clientSocket.Send(message1);
-                    clientSocket.Send(message2);
 
-                    // Close client Socket using the 
-                    // Close() method. After closing, 
-                    // we can use the closed Socket  
-                    // for a new Client Connection 
+                    byte[] message = Encoding.ASCII.GetBytes("Test Server");
+                    // Send a message to Client using Send() method 
+                    clientSocket.Send(message);
+
+                    // Remove
+                    while (true)
+                    {
+                        string user_input = Console.ReadLine();
+                        if (user_input == "q")
+                        {
+                            break;
+                        }
+                        message = Encoding.ASCII.GetBytes(user_input);
+                        clientSocket.Send(message);
+                    }
+
+                    // Close client Socket using the Close() method. After closing, we can use the closed Socket for a new Client Connection 
                     clientSocket.Shutdown(SocketShutdown.Both);
                     clientSocket.Close();
                 }
@@ -89,3 +95,4 @@ namespace Server
         }
     }
 }
+
