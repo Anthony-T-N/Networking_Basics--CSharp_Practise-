@@ -33,29 +33,30 @@ namespace Client
                     sender.Connect(localEndPoint);
 
                     // We print EndPoint information that we are connected 
-                    Console.WriteLine("Socket connected to -> {0} ",
-                                  sender.RemoteEndPoint.ToString());
+                    Console.WriteLine("Socket connected to -> {0} ", sender.RemoteEndPoint.ToString());
 
-                    // Creation of messagge that 
-                    // we will send to Server 
+                    // Creation of messagge that we will send to Server 
                     byte[] messageSent = Encoding.ASCII.GetBytes("Test Client<EOF>");
-                    int byteSent = sender.Send(messageSent);
+                    // int byteSent = sender.Send(messageSent);
+                    sender.Send(messageSent);
 
                     // Data buffer 
                     byte[] messageReceived = new byte[1024];
 
                     // We receive the message using the method Receive(). This method returns number of bytes received, that we'll use to convert them to string 
                     // Note to self: Mutiple receive methods must be placed here to recieve further messages from the server.
-                    for (int i = 0; i <= 10; i++)
+                    int byteRecv = sender.Receive(messageReceived);
+                    Console.WriteLine("Message from Server -> {0}", Encoding.ASCII.GetString(messageReceived, 0, byteRecv));
+
+                    // Remove
+                    while (messageReceived.Length > 0)
                     {
-                        int byteRecv = sender.Receive(messageReceived);
-                        Console.WriteLine("Message from Server -> {0}",
-                              Encoding.ASCII.GetString(messageReceived,
-                                                         0, byteRecv));
+                        //"If no data is available for reading, the Receive method will block until data is available."
+                        byteRecv = sender.Receive(messageReceived);
+                        Console.WriteLine("Message from Server -> {0}", Encoding.ASCII.GetString(messageReceived, 0, byteRecv));
                     }
 
-                    // Close Socket using  
-                    // the method Close() 
+                    // Close Socket using the method Close() 
                     sender.Shutdown(SocketShutdown.Both);
                     sender.Close();
                 }
