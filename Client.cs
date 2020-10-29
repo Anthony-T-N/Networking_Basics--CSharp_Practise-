@@ -13,6 +13,7 @@ namespace Client
         {
             ExecuteClient();
         }
+
         // ExecuteClient() Method 
         static void ExecuteClient()
         {
@@ -23,8 +24,7 @@ namespace Client
                 IPAddress ipAddr = ipHost.AddressList[0];
                 IPEndPoint localEndPoint = new IPEndPoint(ipAddr, 11111);
 
-                // Creation TCP/IP Socket using  
-                // Socket Class Costructor 
+                // Creation TCP/IP Socket using Socket Class Costructor.
                 Socket sender = new Socket(ipAddr.AddressFamily,
                            SocketType.Stream, ProtocolType.Tcp);
                 try
@@ -41,6 +41,7 @@ namespace Client
                     sender.Send(messageSent);
 
                     // Data buffer 
+                    // Note to self: Length of text.
                     byte[] messageReceived = new byte[1024];
 
                     // We receive the message using the method Receive(). This method returns number of bytes received, that we'll use to convert them to string 
@@ -48,13 +49,14 @@ namespace Client
                     int byteRecv = sender.Receive(messageReceived);
                     Console.WriteLine("Message from Server -> {0}", Encoding.ASCII.GetString(messageReceived, 0, byteRecv));
 
-                    // Remove
+                    // ======================================================<SELF-ESTABLISHED>======================================================
                     while (messageReceived.Length > 0)
                     {
                         //"If no data is available for reading, the Receive method will block until data is available."
                         byteRecv = sender.Receive(messageReceived);
                         Console.WriteLine("Message from Server -> {0}", Encoding.ASCII.GetString(messageReceived, 0, byteRecv));
                     }
+                    // ======================================================<SELF-ESTABLISHED>======================================================
 
                     // Close Socket using the method Close() 
                     sender.Shutdown(SocketShutdown.Both);
