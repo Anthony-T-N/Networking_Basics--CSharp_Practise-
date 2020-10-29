@@ -58,8 +58,6 @@ namespace Server
 
                         data += Encoding.ASCII.GetString(bytes, 0, numByte);
 
-                        Console.WriteLine("Me: " + data);
-
                         if (data.IndexOf("<EOF>") > -1)
                             break;
                     }
@@ -67,20 +65,26 @@ namespace Server
                     Console.WriteLine("Text received -> {0} ", data);
 
                     byte[] message = Encoding.ASCII.GetBytes("Test Server");
+
                     // Send a message to Client using Send() method 
                     clientSocket.Send(message);
 
-                    // Remove
-                    while (true)
+                    // ======================================================<SELF-ESTABLISHED>======================================================
+                    while (clientSocket.Connected)
                     {
-                        string user_input = Console.ReadLine();
-                        if (user_input == "q")
+                        do
                         {
-                            break;
+                            string user_input = Console.ReadLine();
+                            if (user_input == "q")
+                            {
+                                break;
+                            }
+                            message = Encoding.ASCII.GetBytes(user_input);
+                            clientSocket.Send(message);
                         }
-                        message = Encoding.ASCII.GetBytes(user_input);
-                        clientSocket.Send(message);
+                        while (!clientSocket.Receive(bytes));
                     }
+                    // ======================================================<SELF-ESTABLISHED>======================================================
 
                     // Close client Socket using the Close() method. After closing, we can use the closed Socket for a new Client Connection 
                     clientSocket.Shutdown(SocketShutdown.Both);
@@ -95,4 +99,3 @@ namespace Server
         }
     }
 }
-
