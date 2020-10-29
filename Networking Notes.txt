@@ -8,6 +8,8 @@ https://www.geeksforgeeks.org/tcp-ip-model/
 
 Basic string message
 https://stackoverflow.com/questions/8773721/how-to-send-a-string-over-a-socket-in-c-sharp
+https://stackoverflow.com/questions/22386649/how-can-i-send-and-recieve-using-sockets-at-the-same-time-on-the-same-port
+
 
 General Approach
 
