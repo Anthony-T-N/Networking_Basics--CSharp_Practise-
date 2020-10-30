@@ -52,13 +52,25 @@ namespace Client
                     // ======================================================<SELF-ESTABLISHED>======================================================
                     while (messageReceived.Length > 0)
                     {
-                        //"If no data is available for reading, the Receive method will block until data is available."
-                        byteRecv = sender.Receive(messageReceived);
-                        Console.WriteLine("Message from Server -> {0}", Encoding.ASCII.GetString(messageReceived, 0, byteRecv));
-                    }
-                    // ======================================================<SELF-ESTABLISHED>======================================================
+                        do
+                        {
+                            //"If no data is available for reading, the Receive method will block until data is available."
+                            byteRecv = sender.Receive(messageReceived);
+                            Console.WriteLine("Message from Server -> {0}", Encoding.ASCII.GetString(messageReceived, 0, byteRecv));
 
-                    // Close Socket using the method Close() 
+                            string user_input = Console.ReadLine();
+                            if (user_input == "q")
+                            {
+                                break;
+                            }
+                            byte[]  message = Encoding.ASCII.GetBytes(user_input);
+                            sender.Send(message);
+                        }
+                        while (0 == 0);
+                    }
+                        // ======================================================<SELF-ESTABLISHED>======================================================
+
+                        // Close Socket using the method Close() 
                     sender.Shutdown(SocketShutdown.Both);
                     sender.Close();
                 }
