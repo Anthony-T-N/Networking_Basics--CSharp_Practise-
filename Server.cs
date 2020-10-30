@@ -81,9 +81,17 @@ namespace Server
                             }
                             message = Encoding.ASCII.GetBytes(user_input);
                             clientSocket.Send(message);
+                            //"If no data is available for reading, the Receive method will block until data is available."
+                            byte[] messageReceived = new byte[1024];
+                            if (messageReceived.Length > 0)
+                            {
+                                int byteRecv = clientSocket.Receive(messageReceived);
+                                Console.WriteLine("Message from Server -> {0}", Encoding.ASCII.GetString(messageReceived, 0, byteRecv));
+                            }
                         }
-                        while (!clientSocket.Receive(bytes));
+                        while (0 == 0);
                     }
+                    Console.WriteLine("Ending Connection");
                     // ======================================================<SELF-ESTABLISHED>======================================================
 
                     // Close client Socket using the Close() method. After closing, we can use the closed Socket for a new Client Connection 
