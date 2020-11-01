@@ -50,6 +50,7 @@ namespace Client
                     Console.WriteLine("Message from Server -> {0}", Encoding.ASCII.GetString(messageReceived, 0, byteRecv));
 
                     // ======================================================<SELF-ESTABLISHED>======================================================
+                    Console.WriteLine("Enter 'q' to quit...");
                     while (messageReceived.Length > 0)
                     {
                         Console.WriteLine("Waiting for reply from server...");
