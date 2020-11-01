@@ -65,9 +65,9 @@ namespace Client
                         byte[]  message = Encoding.ASCII.GetBytes(user_input);
                         sender.Send(message);
                     }
-                        // ======================================================<SELF-ESTABLISHED>======================================================
+                    // ======================================================<SELF-ESTABLISHED>======================================================
 
-                        // Close Socket using the method Close() 
+                    // Close Socket using the method Close() 
                     sender.Shutdown(SocketShutdown.Both);
                     sender.Close();
                 }
