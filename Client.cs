@@ -58,6 +58,7 @@ namespace Client
                         byteRecv = sender.Receive(messageReceived);
                         Console.WriteLine("Message from Server -> {0}", Encoding.ASCII.GetString(messageReceived, 0, byteRecv));
 
+                        Console.Write("You: ");
                         string user_input = Console.ReadLine();
                         if (user_input == "q")
                         {
