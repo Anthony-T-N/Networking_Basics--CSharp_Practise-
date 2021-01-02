@@ -40,7 +40,7 @@ namespace Server
 
                 while (true)
                 {
-                    Console.WriteLine("Waiting connection ... ");
+                    Console.WriteLine("Waiting for connection ... ");
 
                     // Suspend while waiting for 
                     // incoming connection Using  
@@ -72,6 +72,7 @@ namespace Server
                     // ======================================================<SELF-ESTABLISHED>======================================================
                     while (clientSocket.Connected)
                     {
+                        Console.Write("You: ");
                         string user_input = Console.ReadLine();
                         if (user_input == "q")
                         {
